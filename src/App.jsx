@@ -1,34 +1,42 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import { Routes, Route, Link , useLocation} from 'react-router-dom'
+import Home from './pages/Home'
+import Contact from './pages/Contact'
+import Top from './pages/Top'
+import Search from './pages/Search'
+import { useEffect, useState } from 'react'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [current, setCurrent] = useState('/');
+
+  const path = useLocation()
+  console.log(path.pathname)
+
+  useEffect(()=>{
+    setCurrent(path.pathname)
+  }, [path])
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className='back h-screen w-full fixed flex flex-col justify-center items-center' >
+      <div className=' h-[10vh] border w-[98%] absolute top-2 bg-white rounded-lg shadow-lg flex justify-between items-center px-6'>
+        <img src="/vite.svg" alt="" className=' h-1/2 '/>
+        <div className=' w-[500px]  h-full flex justify-between items-center'>
+          <Link to="/" className={current==='/'?'border w-32 text-center p-2 px-4 bg-indigo-300 rounded-full text-white ':'w-32 text-center p-2 px-4'}>Home</Link>
+          <Link to="/top" className={current==='/top'?'border  w-32 text-center p-2 px-4 bg-indigo-300 rounded-full text-white':'w-32 text-center p-2 px-4'}>Monuments</Link>
+          <Link to="/search" className={current==='/search'?'border  w-32 text-center p-2 px-4 bg-indigo-300 rounded-full text-white ':'w-32 text-center p-2 px-4'}>Search</Link>
+          <Link to="/contact" className={current==='/contact'?'border  w-32 text-center p-2 px-4 bg-indigo-300 rounded-full text-white ':'w-32 text-center p-2 px-4'}>Contact Us</Link>
+        </div>
+        <button>SignIn</button>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+      <div className='  h-[calc(90vh-1em)] w-[98%] mt-[calc(10vh+1em)] rounded-lg backdrop-blur-sm' style={{boxShadow:"0 0 25px -15px black"}}>
+        <Routes>
+          <Route path='/' element={<Home/>} />
+          <Route path='/contact' element={<Contact/>} />
+          <Route path='/top' element={<Top/>} />
+          <Route path='/search' element={<Search/>} />
+        </Routes>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </div>
   )
 }
 
