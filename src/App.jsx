@@ -1,5 +1,6 @@
 import './App.css'
 import { Routes, Route, Link , useLocation} from 'react-router-dom'
+import { useAuth0 } from "@auth0/auth0-react";
 import Home from './pages/Home'
 import Contact from './pages/Contact'
 import Top from './pages/Top'
@@ -8,6 +9,8 @@ import { useEffect, useState } from 'react'
 
 function App() {
   const [current, setCurrent] = useState('/');
+  const { loginWithRedirect } = useAuth0();
+
 
   const path = useLocation()
   console.log(path.pathname)
@@ -17,7 +20,7 @@ function App() {
   }, [path])
 
   return (
-    <div className='back h-screen w-full fixed flex flex-col justify-center items-center' >
+    <div className='fixed flex flex-col items-center justify-center w-full h-screen back' >
       <div className=' h-[10vh] border w-[98%] absolute top-2 bg-white rounded-lg shadow-lg flex justify-between items-center px-6'>
         <img src="logo.png" alt="" className=' h-[13vh] '/>
         <div className=' w-[500px]  h-full flex justify-between items-center'>
@@ -26,7 +29,9 @@ function App() {
           <Link to="/search" className={current==='/search'?'border  w-32 text-center p-2 px-4 bg-indigo-300 rounded-full text-white ':'w-32 text-center p-2 px-4'}>Search</Link>
           <Link to="/contact" className={current==='/contact'?'border  w-32 text-center p-2 px-4 bg-indigo-300 rounded-full text-white ':'w-32 text-center p-2 px-4'}>Contact Us</Link>
         </div>
-        <button>SignIn</button>
+        <button onClick={()=>loginWithRedirect(
+
+        )}>SignIn</button>
       </div>
       <div className='  h-[calc(90vh-1em)] w-[98%] mt-[calc(10vh+1em)] rounded-lg backdrop-blur-sm' style={{boxShadow:"0 0 25px -15px black"}}>
         <Routes>
