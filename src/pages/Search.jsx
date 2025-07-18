@@ -12,7 +12,7 @@ function Search() {
     setImage('');
 
     try {
-      const res = await fetch(`/search/?scenario=${query}`);
+      const res = await fetch(`http://localhost:8000/story?place=${query}`);
       const data = await res.json();
       setStory(data.story || `Error: ${data.error}`);
 
@@ -35,7 +35,7 @@ function Search() {
   }
 
   return (
-    <div className="relative flex flex-col items-center justify-start min-h-screen gap-5 p-8 bg-gradient-to-b from-blue-100 to-white">
+    <div className="relative flex flex-col items-center justify-start h-screen gap-5 p-8 overflow-y-auto bg-gradient-to-b from-blue-100 to-white">
       <div className="space-x-5">
         <input
           className="p-2 border rounded-xl"
@@ -69,7 +69,7 @@ function Search() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="w-full max-w-3xl p-8 bg-blue-200 shadow-xl rounded-xl min-h-48"
+        className="w-full max-w-3xl p-8 overflow-y-auto bg-blue-200 shadow-xl rounded-xl min-h-48 max-h-96"
       >
         <p className="font-serif text-lg">{story}</p>
       </motion.div>
