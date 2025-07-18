@@ -2,7 +2,6 @@ import './App.css'
 import { Routes, Route, Link , useLocation} from 'react-router-dom'
 import Home from './pages/Home'
 import Contact from './pages/Contact'
-import Top from './pages/Top'
 import Search from './pages/Search'
 import { useEffect, useState } from 'react'
 
@@ -23,7 +22,6 @@ function App() {
         <img src="logo.png" alt="" className=' h-[13vh] '/>
         <div className=' w-[500px]  h-full flex justify-between items-center'>
           <Link to="/" className={current==='/'?'border w-32 text-center p-2 px-4 bg-indigo-300 rounded-full text-white ':'w-32 text-center p-2 px-4'}>Home</Link>
-          {/* <Link to="/top" className={current==='/top'?'border  w-32 text-center p-2 px-4 bg-indigo-300 rounded-full text-white':'w-32 text-center p-2 px-4'}>Monuments</Link> */}
           <Link to="/search" className={current==='/search'?'border  w-32 text-center p-2 px-4 bg-indigo-300 rounded-full text-white ':'w-32 text-center p-2 px-4'}>Search</Link>
           <Link to="/contact" className={current==='/contact'?'border  w-32 text-center p-2 px-4 bg-indigo-300 rounded-full text-white ':'w-32 text-center p-2 px-4'}>Contact Us</Link>
         </div>
@@ -33,7 +31,6 @@ function App() {
         <Routes>
           <Route path='/' element={<Home/>} />
           <Route path='/contact' element={<Contact/>} />
-          <Route path='/top' element={<Top/>} />
           <Route path='/search' element={<Search/>} />
         </Routes>
       </div>

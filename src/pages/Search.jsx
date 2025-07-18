@@ -4,25 +4,15 @@ import { motion } from 'framer-motion';
 function Search() {
   const [story, setStory] = useState('');
   const [query, setQuery] = useState('');
-  const [image, setImage] = useState('');
-  const UNSPLASH_KEY = import.meta.env.UNSPLASH_ACCESS_KEY;
 
   async function fetchData() {
     setStory('Loading...');
-    setImage('');
 
     try {
       const res = await fetch(`https://mr-guido.onrender.com/story?place=${query}`);
       const data = await res.json();
       setStory(data.story || `Error: ${data.error}`);
 
-      const imgRes = await fetch(
-        `https://api.unsplash.com/search/photos?query=${query}&client_id=${UNSPLASH_KEY}`
-      );
-      const imgData = await imgRes.json();
-      if (imgData.results && imgData.results[0]) {
-        setImage(imgData.results[0].urls.regular);
-      }
     } catch (error) {
       console.error('Error:', error);
       setStory('Failed to load story.');
@@ -57,13 +47,6 @@ function Search() {
         </button>
       </div>
 
-      {image && (
-        <img
-          src={image}
-          alt={query}
-          className="object-cover shadow-lg w-96 h-60 rounded-xl"
-        />
-      )}
 
       <motion.div
         initial={{ opacity: 0, y: 20 }}
