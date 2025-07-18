@@ -12,7 +12,7 @@ function Search() {
     setImage('');
 
     try {
-      const res = await fetch(`http://localhost:8000/story?place=${query}`);
+      const res = await fetch(`https://mr-guido.onrender.com/story?place=${query}`);
       const data = await res.json();
       setStory(data.story || `Error: ${data.error}`);
 
